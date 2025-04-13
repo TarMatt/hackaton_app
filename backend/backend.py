@@ -62,8 +62,8 @@ def detect_animals(data,model,weights,box_threshold:int):
             
             for object in results:
                 idx=object['label']
-            if idx!=None:
-                object['label']=weights.meta["categories"][idx]
+                if idx!=None:
+                    object['label']=weights.meta["categories"][idx]
             
         return results
     
