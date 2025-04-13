@@ -13,4 +13,22 @@ with open(path, "rb") as img:
     files = {"file": img}
     response = requests.post(backend_url, files=files)
 
-print(response.json())
+predictions = response.json()
+
+classes = [obj['label'] for obj in predictions if obj['label']=='bear']
+
+# Output part
+print('//')
+print('detection:')
+print("   ")
+if 'bear' in classes:
+    print('{ATTENTION!! POTENTIAL THREAT DETECTED}')
+else:
+    print('NO THREATS DETECTED')
+print("    ")
+print("    ")
+
+for prediction in predictions:
+    print(f"Class: {prediction['label']} --- Confidence: {prediction['confidence']}")
+
+print("//")
